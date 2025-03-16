@@ -1,0 +1,56 @@
+{
+  "name": "@ph_chen/coc-ocaml",
+  "version": "0.1.0",
+  "description": "Simply ocaml language service for coc.nvim",
+  "author": "ph <chenyi.ph@outlook.com>",
+  "license": "MIT",
+  "main": "dist/extension.js",
+  "keywords": [
+    "coc.nvim"
+  ],
+  "engines": {
+    "coc": "^0.0.82"
+  },
+  "scripts": {
+    "watch": "node esbuild.mjs --watch",
+    "build": "node esbuild.mjs",
+    "prepare": "node esbuild.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "coc.nvim": "^0.0.83-next.18",
+    "esbuild": "^0.19.8",
+    "typescript": "^5.3.3",
+    "util": "^0.12.5"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "coc-ocaml configuration",
+      "properties": {
+        "coc-ocaml.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable coc-ocaml extension"
+        },
+        "coc-ocaml.launcher": {
+          "type": "string",
+          "default": "opam",
+          "enum": [
+            "opam",
+            "dune"
+          ],
+          "description": "Select the ocaml-lsp launcher to use"
+        }
+      }
+    },
+    "commands": []
+  },
+  "dependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "which": "^5.0.0"
+  }
+}
