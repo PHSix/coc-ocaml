@@ -11,10 +11,16 @@ import type {
   ServerOptions,
 } from "coc.nvim";
 
-const getServerCommand = (launcher: "opam" | "dune") => {
-  return launcher === "opam"
-    ? { command: "opam", args: ["exec", "--", "ocamllsp"] }
-    : { command: "dune", args: ["exec", "--", "ocamllsp"] };
+const getServerCommand = (cmd: string) => {
+  if (cmd.endsWith("opam")) {
+    return { command: "opam", args: ["exec", "--", "ocamllsp"] };
+  }
+
+  if (cmd.endsWith("dune")) {
+    return { command: "dune", args: ["exec", "--", "ocamllsp"] };
+  }
+
+  throw new Error(`Unsupported command: ${cmd}`);
 };
 
 export async function activate(context: ExtensionContext): Promise<void> {
@@ -23,7 +29,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     return;
   }
   const { command, args } = getServerCommand(
-    config.get<string>("launcher", "opam") as "opam" | "dune",
+    config.get<string>("lspStartCommand", "opam"),
   );
 
   if (!executable(command)) {
@@ -47,8 +53,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
     initializationOptions: {
       codelens: { enable: true },
       diagnostics: { enable: true },
-      duneDiagnostics: {enable : executable('dune')},
-      extendedHover: {enable : true},
+      duneDiagnostics: { enable: executable("dune") },
+      extendedHover: { enable: true },
     },
   };
 

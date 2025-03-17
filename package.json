@@ -5,9 +5,7 @@
   "author": "ph <chenyi.ph@outlook.com>",
   "license": "MIT",
   "main": "dist/extension.js",
-  "keywords": [
-    "coc.nvim"
-  ],
+  "keywords": ["coc.nvim"],
   "engines": {
     "coc": "^0.0.82"
   },
@@ -23,9 +21,7 @@
     "typescript": "^5.3.3",
     "util": "^0.12.5"
   },
-  "activationEvents": [
-    "*"
-  ],
+  "activationEvents": ["*"],
   "contributes": {
     "configuration": {
       "type": "object",
@@ -36,14 +32,10 @@
           "default": true,
           "description": "Enable coc-ocaml extension"
         },
-        "coc-ocaml.launcher": {
+        "coc-ocaml.lspStartCommand": {
           "type": "string",
           "default": "opam",
-          "enum": [
-            "opam",
-            "dune"
-          ],
-          "description": "Select the ocaml-lsp launcher to use"
+          "description": "Path to the start ocaml language server"
         }
       }
     },
